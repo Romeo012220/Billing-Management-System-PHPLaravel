@@ -12,6 +12,7 @@ class MenuItem extends Model
     'category',
     'description',
     'price',
+    'image',
     'is_active',
 ];
 }

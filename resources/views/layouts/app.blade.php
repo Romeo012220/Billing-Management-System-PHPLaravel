@@ -36,10 +36,10 @@
                 Transactions
             </h3>
 
-            <a href="#"
-                class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
-                Billing
-            </a>
+           <a href="{{ route('payment') }}"
+    class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+    Payment
+</a>
 
             <a href="#"
                 class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100">

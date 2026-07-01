@@ -17,16 +17,29 @@
         @endif
 
         <div class="bg-white p-6 rounded-lg shadow">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-semibold">Saved Menu Items</h2>
+         <div class="flex justify-between items-center mb-4">
+    <h2 class="text-xl font-semibold">Saved Menu Items</h2>
 
-                <input
-                    type="text"
-                    wire:model.live="search"
-                    placeholder="Search menu item..."
-                    class="border rounded px-3 py-2 w-64"
-                >
-            </div>
+    <div class="flex gap-3">
+        <select
+            wire:model.live="categoryFilter"
+            class="border rounded px-3 py-2 w-48"
+        >
+            <option value="">All Categories</option>
+            <option value="Pizza">Pizza</option>
+            <option value="Add-ons">Add-ons</option>
+            <option value="Drinks">Drinks</option>
+            <option value="Dessert">Dessert</option>
+        </select>
+
+        <input
+            type="text"
+            wire:model.live="search"
+            placeholder="Search menu item..."
+            class="border rounded px-3 py-2 w-64"
+        >
+    </div>
+</div>
 
             <div class="overflow-x-auto">
                 <table class="w-full border border-gray-200">
@@ -49,9 +62,33 @@
                                     {{ $item->item_code }}
                                 </td>
 
-                                <td class="border px-3 py-2 font-medium">
-                                    {{ $item->name }}
-                                </td>
+                                <td class="border px-3 py-2">
+    <div class="flex items-center gap-3">
+
+        @if($item->image)
+            <img
+                src="{{ asset('storage/' . $item->image) }}"
+                alt="{{ $item->name }}"
+                class="w-14 h-14 rounded-lg object-cover border"
+            >
+        @else
+            <div class="w-14 h-14 rounded-lg bg-gray-200 flex items-center justify-center text-gray-400">
+                N/A
+            </div>
+        @endif
+
+        <div>
+            <div class="font-semibold text-gray-800">
+                {{ $item->name }}
+            </div>
+
+            <div class="text-xs text-gray-500">
+                {{ $item->item_code }}
+            </div>
+        </div>
+
+    </div>
+</td>
 
                                 <td class="border px-3 py-2">
                                     {{ $item->category }}

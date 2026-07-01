@@ -17,6 +17,9 @@ return new class extends Migration
 
             $table->text('description')->nullable();
 
+            // Item Image
+            $table->string('image');
+
             $table->decimal('price', 10, 2);
 
             $table->boolean('is_active')->default(true);

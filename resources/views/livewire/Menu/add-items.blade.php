@@ -73,6 +73,41 @@
                 </div>
             </div>
 
+
+            <!-- Item Image -->
+<div class="md:col-span-2">
+    <label class="block text-sm font-medium text-gray-700 mb-2">
+        Item Image <span class="text-red-500">*</span>
+    </label>
+
+    <input
+        type="file"
+        wire:model="image"
+        accept="image/*"
+        class="w-full rounded-lg border border-gray-300 px-4 py-2
+               file:bg-red-600 file:text-white file:border-0
+               file:px-4 file:py-2 file:rounded-lg
+               file:mr-4 cursor-pointer"
+    >
+
+    @error('image')
+        <span class="text-red-500 text-sm">{{ $message }}</span>
+    @enderror
+
+    <div wire:loading wire:target="image" class="text-blue-600 text-sm mt-2">
+        Uploading image...
+    </div>
+
+    @if ($image)
+        <div class="mt-4">
+            <img
+                src="{{ $image->temporaryUrl() }}"
+                class="w-40 h-40 object-cover rounded-lg border"
+            >
+        </div>
+    @endif
+</div>
+
             <!-- Description -->
             <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-2">

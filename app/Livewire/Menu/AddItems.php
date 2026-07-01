@@ -4,15 +4,19 @@ namespace App\Livewire\Menu;
 
 use App\Models\MenuItem;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class AddItems extends Component
 {
+    use WithFileUploads;
+
     public $item_code;
     public $name;
     public $category;
     public $description;
     public $price;
     public $is_active = true;
+    public $image;
 
     protected function rules()
     {
@@ -23,12 +27,15 @@ class AddItems extends Component
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'is_active' => 'boolean',
+            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
 
     public function save()
     {
         $this->validate();
+
+        $imagePath = $this->image->store('menu-items', 'public');
 
         MenuItem::create([
             'item_code' => $this->item_code,
@@ -37,6 +44,7 @@ class AddItems extends Component
             'description' => $this->description,
             'price' => $this->price,
             'is_active' => $this->is_active,
+            'image' => $imagePath,
         ]);
 
         session()->flash('success', 'Menu item added successfully.');
@@ -52,6 +60,7 @@ class AddItems extends Component
             'category',
             'description',
             'price',
+            'image',
         ]);
 
         $this->is_active = true;
